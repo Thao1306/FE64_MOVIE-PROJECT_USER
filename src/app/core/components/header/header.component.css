@@ -1,0 +1,16 @@
+.example-spacer {
+  flex: 1;
+}
+.header {
+  background-color: white;
+  color: black;
+}
+a {
+  margin: 0 10px;
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+}
+.a-group:hover {
+  color: #fb4226;
+}
