@@ -1,6 +1,10 @@
 <mat-toolbar class="header">
   <mat-toolbar-row>
-    <span>Logo</span>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>movie</mat-icon>
+    </button>
+    <span>Booking Ticket</span>
+
     <span class="example-spacer"></span>
     <div class="d-flex">
       <a class="a-group">Lịch chiếu</a>
@@ -8,9 +12,19 @@
     </div>
     <span class="example-spacer"></span>
 
-    <button mat-stroked-button>
+    <button mat-button routerLink="/" routerLinkActive="active">
+      <mat-icon>home</mat-icon>
+      <span style="margin-left: 5px;">Trang chủ</span>
+    </button>
+
+    <button mat-button routerLink="/signin" routerLinkActive="active">
       <mat-icon>account_circle</mat-icon>
       <span style="margin-left: 5px;">Đăng nhập</span>
     </button>
+    <button mat-button routerLink="/signup" routerLinkActive="active">
+      <mat-icon>app_registration</mat-icon>
+      <span style="margin-left: 5px;">Đăng ký</span>
+    </button>
+
   </mat-toolbar-row>
 </mat-toolbar>

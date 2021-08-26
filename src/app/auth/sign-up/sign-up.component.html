@@ -1,0 +1,44 @@
+<div class="container">
+  <h1 class="title mat-display-2">Đăng ký</h1>
+  <!-- reference -->
+  <!-- validation html5 attribute: required, minlength, maxlength, email, pattern -->
+  <form #signupForm="ngForm">
+    <mat-form-field class="form-group" appearance="outline">
+      <mat-label>Tài Khoản</mat-label>
+      <input #taiKhoan="ngModel" matInput required name="taiKhoan" ngModel />
+      <mat-error *ngIf="taiKhoan.errors?.required">Vui lòng nhập tài khoản</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-group" appearance="outline">
+      <mat-label>Mật Khẩu</mat-label>
+      <input #matKhau="ngModel" matInput required minlength="8" maxlength="16" type="password" name="matKhau" ngModel />
+      <mat-error *ngIf="matKhau.errors?.required">Vui lòng nhập mật khẩu</mat-error>
+      <mat-error *ngIf="matKhau.errors?.minlength || matKhau.errors?.maxlength">Mật khẩu phải từ 8 tới 16 kí tự
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-group" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input #email="ngModel" matInput required email name="email" ngModel />
+      <mat-error *ngIf="email.errors?.required">Vui lòng nhập email</mat-error>
+      <mat-error *ngIf="email.errors?.email">Email không đúng định dạng</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-group" appearance="outline">
+      <mat-label>Họ Tên</mat-label>
+      <input #hoTen="ngModel" matInput required name="hoTen" ngModel />
+      <mat-error *ngIf="hoTen.errors?.required">Vui lòng nhập họ tên</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-group" appearance="outline">
+      <mat-label>Số điện thoại</mat-label>
+      <input #phone="ngModel" matInput required pattern="^[0-9]+$" name="soDt" ngModel />
+      <mat-error *ngIf="phone.errors?.required">Vui lòng nhập số điện thoại</mat-error>
+      <mat-error *ngIf="phone.errors?.pattern">Vui lòng nhập chữ số</mat-error>
+    </mat-form-field>
+
+    <div class="btn-group mat-display-2">
+      <button mat-raised-button color="warn">Đăng ký</button>
+    </div>
+  </form>
+</div>
