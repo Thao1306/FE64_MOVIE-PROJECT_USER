@@ -12,19 +12,23 @@
     </div>
     <span class="example-spacer"></span>
 
-    <button mat-button routerLink="/" routerLinkActive="active">
+    <button mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">
       <mat-icon>home</mat-icon>
       <span style="margin-left: 5px;">Trang chủ</span>
     </button>
 
-    <button mat-button routerLink="/signin" routerLinkActive="active">
-      <mat-icon>account_circle</mat-icon>
-      <span style="margin-left: 5px;">Đăng nhập</span>
-    </button>
-    <button mat-button routerLink="/signup" routerLinkActive="active">
-      <mat-icon>app_registration</mat-icon>
-      <span style="margin-left: 5px;">Đăng ký</span>
-    </button>
+    <button *ngIf="loggedInUser; else authBtn" mat-button>Hello! {{ loggedInUser?.hoTen}} ^-^</button>
+
+    <ng-template #authBtn>
+      <button mat-button routerLink="/signin" routerLinkActive="active">
+        <mat-icon>account_circle</mat-icon>
+        <span style="margin-left: 5px;">Đăng nhập</span>
+      </button>
+      <button mat-button routerLink="/signup" routerLinkActive="active">
+        <mat-icon>app_registration</mat-icon>
+        <span style="margin-left: 5px;">Đăng ký</span>
+      </button>
+    </ng-template>
 
   </mat-toolbar-row>
 </mat-toolbar>
