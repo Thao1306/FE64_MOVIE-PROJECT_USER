@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../../services/auth.service';
+import { Router } from '@angular/router';
+import { AuthAPIService } from './../../services/auth-api.service';
+import { NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-sign-in',
@@ -6,10 +10,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-
-  constructor() { }
+  @ViewChild('signinForm') signinForm!: NgForm;
+  constructor(private authApiSv: AuthAPIService, private authSv: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  handleSubmit(): void {
+    if (this.signinForm.invalid) return;
+    const newUser = { ...this.signinForm.value, maNhom: 'GP01'};
+    this.authApiSv.signIn(this.signinForm.value).subscribe(
+      (res) => {
+        // console.log(res);
+        this.authSv.setMe(res.content);
+        localStorage.setItem('t', res.content.accessToken);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    console.log(this.signinForm);
+    console.log(this.signinForm.value);
   }
 
 }

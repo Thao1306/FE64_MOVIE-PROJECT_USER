@@ -2,7 +2,7 @@
   <h1 class="title mat-display-2">Đăng nhập</h1>
   <!-- reference -->
   <!-- validation html5 attribute: required, minlength, maxlength, email, pattern -->
-  <form #signinForm="ngForm">
+  <form #signinForm="ngForm" (submit)="handleSubmit()">
     <mat-form-field class="form-group" appearance="outline">
       <mat-label>Tài khoản</mat-label>
       <input #taiKhoan="ngModel" matInput required name="taiKhoan" ngModel />
