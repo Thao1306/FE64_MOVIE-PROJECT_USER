@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TokenInterceptor } from './services/token.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
+import { BookingModule } from './booking/booking.module';
 import { DetailModule } from './detail/detail.module';
 import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
@@ -30,6 +31,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     HomeModule,
     DetailModule,
     AuthModule,
+    BookingModule,
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
