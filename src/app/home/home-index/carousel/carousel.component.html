@@ -1,37 +1,73 @@
 <!-- Carousel -->
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li
-      data-target="#carouselExampleIndicators"
-      data-slide-to="0"
-      class="active"
-    ></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <ng-container *ngFor="let item of movieBanners">
-      <div class="carousel-item" [ngClass]="{ active: setActive(item) }">
-        <img [src]="item.hinhAnh" class="d-block w-100" alt="..." />
-      </div>
-    </ng-container>
+<div *ngIf="isLoading; else carousel" class="container text-center my-5">
+  <div class="spinner-border text-danger" role="status">
+    <span class="sr-only">Loading...</span>
   </div>
-  <a
-    class="carousel-control-prev"
-    href="#carouselExampleIndicators"
-    role="button"
-    data-slide="prev"
-  >
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a
-    class="carousel-control-next"
-    href="#carouselExampleIndicators"
-    role="button"
-    data-slide="next"
-  >
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
 </div>
+<ng-template #carousel>
+  <div
+    id="carouselExampleIndicators"
+    class="carousel slide"
+    data-ride="carousel"
+  >
+    <ol class="carousel-indicators">
+      <li
+        data-target="#carouselExampleIndicators"
+        data-slide-to="0"
+        class="active"
+      ></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <ng-container *ngFor="let item of movieBanners">
+        <div
+          class="carousel-item"
+          [ngClass]="{ active: setActive(item) }"
+          (click)="openModal('custom-modal-1')"
+        >
+          <img [src]="item.hinhAnh" class="banner-img img-fluid" alt="..." />
+        </div>
+      </ng-container>
+    </div>
+    <a
+      class="carousel-control-prev"
+      href="#carouselExampleIndicators"
+      role="button"
+      data-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a
+      class="carousel-control-next"
+      href="#carouselExampleIndicators"
+      role="button"
+      data-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</ng-template>
+<!-- DEMO -->
+<!-- block display trailer video of movies -->
+<jw-modal id="custom-modal-1">
+  <div style="background-color: black; opacity: 0.75; text-align: right">
+    <button
+      (click)="closeModal('custom-modal-1')"
+      class="btn"
+      style="color: white; line-height: 0"
+    >
+      <mat-icon>highlight_off</mat-icon>
+    </button>
+  </div>
+  <div class="embed-responsive embed-responsive-16by9">
+    <iframe
+      class="embed-responsive-item"
+      src="https://www.youtube.com/embed/o7cA0MtTuYw"
+      title="YouTube video player"
+      allowfullscreen
+    ></iframe>
+  </div>
+</jw-modal>

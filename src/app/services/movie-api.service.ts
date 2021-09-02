@@ -10,7 +10,7 @@ export class MovieApiService {
 
   fetchMovieBanner = (): Observable<any> => {
     return this.http.get(
-      'http://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachBanner'
+      'https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachBanner'
     );
   };
 }

@@ -1,25 +1,46 @@
+#carouselExampleIndicators .carousel-item {
+  cursor: pointer;
+}
 .carousel-indicators li {
   border-radius: 50%;
   background-color: #d8d8d8;
 }
 .carousel-indicators .active {
-  background-color: #fa5238;
+  background-color: #f44336;
+}
+.banner-img {
+  display: block;
+  width: 100%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 576px) {
   .carousel-indicators li {
     display: none;
   }
+  .banner-img {
+    height: 150px;
+  }
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 576px) {
   .carousel-indicators li {
     width: 10px;
     height: 10px;
+  }
+  .banner-img {
+    height: 288px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .banner-img {
+    height: 385px;
   }
 }
 @media screen and (min-width: 992px) {
   .carousel-indicators li {
     width: 15px;
     height: 15px;
+  }
+  .banner-img {
+    height: 622px;
   }
 }
