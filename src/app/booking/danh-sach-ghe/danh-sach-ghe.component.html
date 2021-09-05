@@ -1,0 +1,15 @@
+<div class="container ">
+  <div class="row mat-display-2 mt-5">
+    <div class="col-4 mx-auto bg-light p-4 text-center">
+      <div class="screen">Màn hình</div>
+      <app-ghe (bookSeat)="setBookingSeats($event)" [seat]="item" *ngFor="let item of seats "></app-ghe>
+    </div>
+    <div class="col-8">
+      Danh sách ghế đang đặt ({{bookingSeats.length}})
+      <p *ngFor="let item of bookingSeats">
+        Ghế: {{ item.TenGhe }}, Giá: {{ item.Gia }}
+        <!-- <span (click)="cancelSeat(item.SoGhe)" class="text-warning" style="cursor: pointer">[Huỷ]</span> -->
+      </p>
+    </div>
+  </div>
+</div>

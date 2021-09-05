@@ -1,3 +1,5 @@
+import { DatVeIndexComponent } from '../booking/datve-index/datve-index.component';
+import { DanhSachGheComponent } from './../booking/danh-sach-ghe/danh-sach-ghe.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeIndexComponent } from '../home/home-index/home-index.component';
@@ -8,6 +10,8 @@ import { SignInComponent } from './../auth/sign-in/sign-in.component';
 const routes: Routes = [
   { path: '', component: HomeIndexComponent },
   { path: 'detail/:id', component: DetailIndexComponent },
+  { path: 'datve', component: DatVeIndexComponent },
+  { path: 'danhsachghe', component: DanhSachGheComponent },
   { path: 'signin', component: SignInComponent },
   { path: 'signup', component: SignUpComponent },
 ];
