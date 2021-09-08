@@ -13,4 +13,10 @@ export class MovieApiService {
       'https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachBanner'
     );
   };
+
+  fetchMovieList = (): Observable<any> => {
+    return this.http.get(
+      'https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim'
+    );
+  };
 }

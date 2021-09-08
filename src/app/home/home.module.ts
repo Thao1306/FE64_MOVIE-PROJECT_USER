@@ -8,10 +8,11 @@ import { TheatersShowTimesComponent } from './home-index/theaters-show-times/the
 import { MatIconModule } from '@angular/material/icon';
 import { ModalComponent } from '../components/modal/modal.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [HomeIndexComponent, CarouselComponent, MoviesComponent, TheatersShowTimesComponent, ModalComponent],
-  imports: [CommonModule, RouterModule, MatIconModule, MatTabsModule],
+  imports: [CommonModule, RouterModule, MatIconModule, MatTabsModule, SlickCarouselModule],
   // exports: [HomeIndexComponent],
 })
 export class HomeModule {}

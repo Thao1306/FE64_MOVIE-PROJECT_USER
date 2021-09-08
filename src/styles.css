@@ -6,7 +6,28 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.slick-prev, .slick-next {
-    background-color: #000 ;
-    opacity: 0.75;
+.slick-slider {
+    width: 88%;
+    margin: auto;
+    background: white;
+  }
+  
+/* body .slick-prev, 
+body .slick-next {
+    height: 30px;
+    width: 30px;
+    left: -35px;
+
+} */
+body .slick-prev {
+    left: -40px;
+
+}
+
+body .slick-prev:before, body .slick-next:before {
+    color: black;
+    font-size: 30px;
+}
+.mat-tab-nav-bar, .mat-tab-header {
+    border: none ;
 }

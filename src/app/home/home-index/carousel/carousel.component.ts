@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ModalService } from 'src/app/components/modal/modal.service';
 import { IMovieBanner } from 'src/app/models/movies';
 import { MovieApiService } from 'src/app/services/movie-api.service';
@@ -9,7 +10,7 @@ import { MoviesService } from 'src/app/services/movies.service';
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.css'],
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent implements OnInit, OnDestroy {
   constructor(
     private movieApiSv: MovieApiService,
     private movieSv: MoviesService,
@@ -18,20 +19,23 @@ export class CarouselComponent implements OnInit {
 
   movieBanners: IMovieBanner[] = [];
   isLoading: boolean = true;
+  fetchMovieBannerSubscription: Subscription | undefined;
+  movieBannersSubscription: Subscription | undefined;
 
   fetchMovieBanner = () => {
-    this.isLoading = true;
-    this.movieApiSv.fetchMovieBanner().subscribe(
-      (res) => {
-        console.log(res);
-        this.movieSv.setMovieBanners(res.content);
-        this.isLoading = false;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.fetchMovieBannerSubscription = this.movieApiSv
+      .fetchMovieBanner()
+      .subscribe(
+        (res) => {
+          this.movieSv.setMovieBanners(res.content);
+          this.isLoading = false;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   };
+
   setActive = (item: IMovieBanner) => {
     if (item.maBanner === 1) return true;
     return false;
@@ -47,9 +51,15 @@ export class CarouselComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchMovieBanner();
-    this.movieSv.movieBanners.subscribe((banners: IMovieBanner[]) => {
-      this.movieBanners = banners;
-      console.log(this.movieBanners);
-    });
+    this.movieBannersSubscription = this.movieSv.movieBanners.subscribe(
+      (banners: IMovieBanner[]) => {
+        this.movieBanners = banners;
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.fetchMovieBannerSubscription?.unsubscribe;
+    this.movieBannersSubscription?.unsubscribe;
   }
 }

@@ -1,22 +1,85 @@
-
-.items {
-    width: 90%;
-    margin: 0px auto;
-    margin-top: 100px
+.movieBlock {
+    margin: 75px auto;
 }
-.slick-slide {
-    margin: 10px
+.showMovie {
+    margin: 40px auto;
 }
-
-.slick-slide img {
-    width: 100%;
-    border: 0px solid #000
+.movieContent {
+    position: relative;
+    cursor: pointer;
+    margin: 15px;
 }
-.slick-prev {
-    background-color: #000 !important;
-    color: #000;
+.play-button {
+    position: absolute;
+    top: 33%;
+    left: 40%;
+    color: white;
+    border: 3px solid white;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0;
 }
-.slick-prev:hover {
-    background-color: #000 !important;
-    color: #000;
+.movieImage:hover .play-button {
+    opacity: 0.9;
+    cursor: pointer;
+    transition: 0.5s;    
+}
+.movieImage:hover .play-button:hover {
+    opacity: 0.7;
+}
+.movieImage:hover img {
+    opacity: 0.75;
+}
+.movieInfo .title {
+    font-weight: 500;
+    font-size: 20px;
+}
+.movieInfo .movieTitle {
+    height: 42px;
+    max-height: 78px;
+    margin: 10px 0 25px 0;
+}
+.movieInfo .movieRating {
+    padding-top: 5px;
+}
+.movieTitle .hotMovie {
+    font-size: 14px;
+    background-color: #fb4226;
+    border-radius: 4px;
+    padding: 0 5px;
+    color: #fff;
+    min-width: 33px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 8px;
+}
+/* Responsive */
+@media screen and (max-width: 1200px) {
+    .movieContent .imgMovie {
+        width: 180px;
+        height: 280px;
+    }
+    .movieInfo .movieTitle {
+        margin-bottom: 15px;
+        width: inherit;
+    }
+    .movieInfo .title {
+        font-size: 17px;
+    }
+}
+@media screen and (max-width: 576px) {
+    .movieContent .imgMovie {
+        width: 100%;
+        height: 70%;
+    }
+    .movieBlock {
+        margin: 50px auto;
+    }
+    .showMovie {
+        margin: 25px auto;
+    }
 }
