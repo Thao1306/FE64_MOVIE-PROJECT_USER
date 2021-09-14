@@ -9,10 +9,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { ModalComponent } from '../components/modal/modal.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import {MatListModule} from '@angular/material/list';
+import {MatSelectModule} from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HomeIndexComponent, CarouselComponent, MoviesComponent, TheatersShowTimesComponent, ModalComponent],
-  imports: [CommonModule, RouterModule, MatIconModule, MatTabsModule, SlickCarouselModule],
+  imports: [CommonModule, RouterModule, MatIconModule, MatTabsModule, SlickCarouselModule, MatListModule, MatSelectModule, FormsModule],
   // exports: [HomeIndexComponent],
 })
 export class HomeModule {}
