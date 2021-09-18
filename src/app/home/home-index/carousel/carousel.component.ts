@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ModalService } from 'src/app/components/modal/modal.service';
 import { IMovieBanner } from 'src/app/models/movies';
 import { MovieApiService } from 'src/app/services/movie-api.service';
 import { MoviesService } from 'src/app/services/movies.service';
@@ -13,8 +12,7 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class CarouselComponent implements OnInit, OnDestroy {
   constructor(
     private movieApiSv: MovieApiService,
-    private movieSv: MoviesService,
-    private modalSv: ModalService
+    private movieSv: MoviesService
   ) {}
 
   movieBanners: IMovieBanner[] = [];
@@ -39,14 +37,6 @@ export class CarouselComponent implements OnInit, OnDestroy {
   setActive = (item: IMovieBanner) => {
     if (item.maBanner === 1) return true;
     return false;
-  };
-
-  openModal = (id: string) => {
-    this.modalSv.open(id);
-  };
-
-  closeModal = (id: string) => {
-    this.modalSv.close(id);
   };
 
   ngOnInit(): void {

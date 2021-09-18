@@ -1,109 +1,135 @@
 <!-- Movie theaters_Show-time_Block -->
-<div class="container pb-5">
-  <h1 class="text-center">Cụm rạp</h1>
-  <div class="row">
-    <div class="col-md-2 parentListCinemas" style="height: 705px">
-      <div class="list-group" id="list-tab" role="tablist">
-        <a
-          *ngFor="let cinema of cinemaList; let order = index"
-          class="list-group-item list-group-item-action"
-          [ngClass]="{ active: setActive(order) }"
-          data-toggle="list"
-          role="tab"
-          href="#{{ cinema.maHeThongRap }}"
-          id="{{ cinema.biDanh }}"
-          (click)="handleCinemaSelected(cinema.maHeThongRap)"
-        >
-          <img width="40%" height="40%" src="{{ cinema.logo }}" />
-        </a>
-      </div>
+<div id="cinemaBlock">
+  <div *ngIf="isLoading; else cinemaBlock" class="container text-center my-5">
+    <div class="spinner-border text-danger" role="status">
+      <span class="sr-only">Loading...</span>
     </div>
-
-    <div class="col-md-4 listCinemas">
-      <div class="tab-content" id="nav-tabContent-CinemaBranchList">
-        <div class="tab-pane fade show active" [id]="cinemaId" role="tabpanel">
-          <div class="list-group" role="tablist">
+  </div>
+  <ng-template #cinemaBlock>
+    <div class="container bannerHeader"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2 parentListCinemas" style="height: 705px">
+          <div class="list-group" id="list-tab" role="tablist">
             <a
-              *ngFor="let cinemaBranch of cinemaBranchList; let order = index"
+              *ngFor="let cinema of cinemaList; let order = index"
               class="list-group-item list-group-item-action"
               [ngClass]="{ active: setActive(order) }"
-              id="{{ cinemaBranch.maCumRap }}"
               data-toggle="list"
-              href="#{{ cinemaBranch.maCumRap }}"
               role="tab"
-              (click)="cinemaBranchSelected(cinemaBranch.maCumRap)"
+              href="#{{ cinema.maHeThongRap }}"
+              id="{{ cinema.biDanh }}"
+              (click)="handleCinemaSelected(cinema.maHeThongRap)"
             >
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-3">
-                    <img
-                      src="{{ cinemaBranch.hinhAnh }}"
-                      style="width: inherit"
-                    />
-                  </div>
-                  <div class="col-md-9" style="display: grid">
-                    <span style="font-size: 16px; font-weight: 500">{{
-                      cinemaBranch.tenCumRap
-                    }}</span>
-                    <span class="infoCinemaBranch">{{
-                      cinemaBranch.diaChi
-                    }}</span>
-                    <span>[Chi tiết]</span>
-                  </div>
-                </div>
-              </div>
+              <img src="{{ cinema.logo }}" />
             </a>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-md-6 listMovies">
-      <div class="tab-content" id="nav-tabContent-CinemaBranch-FilmList">
-        <div
-          class="tab-pane fade show active filmList"
-          [id]="cinemaBranchId"
-          role="tabpanel"
-        >
-          <div
-            *ngFor="let item of listFilmShowing"
-            id="{{ item.maPhim }}"
-            class="filmItem"
-          >
-            <div class="d-flex">
-              <img class="filmImage" src="{{ item.hinhAnh }}" />
-              <div class="filmDetail">
-                <div class="d-flex">
-                  <span class="hotMovie">HOT</span>
-                  <span style="font-size: 20px; font-weight: 500">{{
-                    item.tenPhim
-                  }}</span>
-                </div>
-                <div>
-                  <form
-                    #film="ngForm"
-                    (submit)="handleBooking()"
-                    [name]="item.maPhim"
-                  >
-                    <mat-form-field appearance="fill">
-                      <mat-label>Chọn suất chiếu</mat-label>
-                      <mat-select
-                        #SelectedShowTimeFilm="ngModel"
-                        name="showTimeFilm"
-                        ngModel
-                      >
-                        <mat-option
-                          *ngFor="let showTime of item.lstLichChieuTheoPhim"
-                          [value]="showTime.maLichChieu"
-                        >
-                          {{ showTime.ngayChieu }} - {{ showTime.gioChieu }}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <div>
-                      <button class="btn btn-success">Đặt vé</button>
+        <div class="col-md-4 listCinemas">
+          <div class="tab-content" id="nav-tabContent-CinemaBranchList">
+            <div
+              class="tab-pane fade show active"
+              [id]="cinemaId"
+              role="tabpanel"
+            >
+              <div class="list-group" role="tablist">
+                <a
+                  *ngFor="
+                    let cinemaBranch of cinemaBranchList;
+                    let order = index
+                  "
+                  class="list-group-item list-group-item-action"
+                  [ngClass]="{ active: setActive(order) }"
+                  id="{{ cinemaBranch.maCumRap }}"
+                  data-toggle="list"
+                  href="#{{ cinemaBranch.maCumRap }}"
+                  role="tab"
+                  (click)="handleCinemaBranchSelected(cinemaBranch.maCumRap)"
+                >
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-lg-3 cinemaBranchImg">
+                        <img
+                          src="{{ cinemaBranch.hinhAnh }}"
+                          style="width: inherit"
+                        />
+                      </div>
+                      <div class="col-lg-9 col-md-12" style="display: grid">
+                        <span style="font-size: 16px; font-weight: 500">{{
+                          cinemaBranch.tenCumRap
+                        }}</span>
+                        <span class="infoCinemaBranch">{{
+                          cinemaBranch.diaChi
+                        }}</span>
+                      </div>
                     </div>
-                  </form>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 listMovies">
+          <div class="tab-content" id="nav-tabContent-CinemaBranch-FilmList">
+            <div
+              class="tab-pane fade show active filmList"
+              [id]="cinemaBranchId"
+              role="tabpanel"
+            >
+              <div
+                *ngFor="let item of listFilmShowing"
+                id="{{ item.maPhim }}"
+                class="filmItem"
+              >
+                <div class="d-flex align-items-center">
+                  <div class="col-lg-5">
+                    <img class="filmImage" src="{{ item.hinhAnh }}" />
+
+                  </div>
+                  <div class="col-lg-7 col-12">
+                    <div class="filmDetail">
+                      <div class="d-flex pb-3">
+                        <span class="hotMovie">HOT</span>
+                        <span style="font-size: 20px; font-weight: 500">{{
+                          item.tenPhim
+                        }}</span>
+                      </div>
+                      <div>
+                        <form
+                          #film="ngForm"
+                          (submit)="handleBooking()"
+                          [name]="item.maPhim"
+                        >
+                          <mat-form-field appearance="fill">
+                            <mat-label>Chọn suất chiếu</mat-label>
+                            <mat-select
+                              #SelectedShowTimeFilm="ngModel"
+                              name="showTimeFilm"
+                              ngModel
+                              [required]="checkBookingSelected"
+                            >
+                              <mat-option
+                                *ngFor="let showTime of item.lstLichChieuTheoPhim"
+                                [value]="showTime.maLichChieu"
+                              >
+                                {{ showTime.ngayChieu }} - {{ showTime.gioChieu }}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error
+                              *ngIf="SelectedShowTimeFilm.errors?.required"
+                              >Vui lòng chọn suất chiếu</mat-error
+                            >
+                          </mat-form-field>
+                          <div>
+                            <button class="btn btn-success">Đặt vé</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -111,5 +137,6 @@
         </div>
       </div>
     </div>
-  </div>
+    <div class="container bannerHeader bannerFooter "></div>
+  </ng-template>
 </div>

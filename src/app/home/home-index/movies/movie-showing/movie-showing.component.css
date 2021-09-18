@@ -1,0 +1,11 @@
+.showMovie {
+  margin: 40px auto;
+}
+
+/* Responsive */
+
+@media screen and (max-width: 576px) {
+  .showMovie {
+    margin: 25px auto;
+  }
+}

@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ModalService } from 'src/app/components/modal/modal.service';
 import { IMovie } from 'src/app/models/movies';
 import { MovieApiService } from 'src/app/services/movie-api.service';
 import { MoviesService } from 'src/app/services/movies.service';
@@ -13,49 +12,17 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class MoviesComponent implements OnInit, OnDestroy {
   constructor(
     private movieApiSv: MovieApiService,
-    private movieSV: MoviesService,
-    private modalSv: ModalService
+    private movieSV: MoviesService
   ) {}
+
+  isLoading: boolean = true;
 
   nowShowingList: IMovie[] = [];
   comingSoonList: IMovie[] = [];
-  movieTrailer: string | undefined = '';
-  movieImg: string | undefined = '';
-  isLoading: boolean = true;
   fetchMovieListSubscription: Subscription | undefined;
   movieListSubscription: Subscription | undefined;
 
-  slideConfig = {
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    rows: 2,
-    responsive: [
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          arrows: false,
-        },
-      },
-      {
-        breakpoint: 576,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          rows: 1,
-          arrows: false,
-        },
-      },
-    ],
-  };
+  active: boolean = true;
 
   fetchMovieList = () => {
     this.fetchMovieListSubscription = this.movieApiSv
@@ -71,30 +38,11 @@ export class MoviesComponent implements OnInit, OnDestroy {
       );
   };
 
-  openModalShowing = (id: string) => {
-    let movie = this.nowShowingList.find(
-      (item: IMovie) => item.maPhim.toString() === id
-    );
-    this.movieTrailer = movie?.trailer;
-    this.movieImg = movie?.hinhAnh;
-    setTimeout(() => {
-      this.modalSv.open('custom-modal-2');
-    }, 100);
-  };
-
-  openModalComing = (id: string) => {
-    let movie = this.comingSoonList.find(
-      (item: IMovie) => item.maPhim.toString() === id
-    );
-    this.movieTrailer = movie?.trailer;
-    this.movieImg = movie?.hinhAnh;
-    setTimeout(() => {
-      this.modalSv.open('custom-modal-2');
-    }, 100);
-  };
-
-  closeModal = (id: string) => {
-    this.modalSv.close(id);
+  handleTab = (tab: number) => {
+    if (!tab) {
+      this.active = true;
+    } else this.active = false;
+    return tab;
   };
 
   ngOnInit(): void {

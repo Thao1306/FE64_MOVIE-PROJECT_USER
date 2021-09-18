@@ -1,16 +1,43 @@
+.headerShowLargeScreen {
+  background-color: white;
+  color: black;
+  position: fixed;
+  z-index: 1030;
+  top: -3px;
+  opacity: 0.9;
+}
 .example-spacer {
   flex: 1 1 auto;
 }
-.header {
-  background-color: white;
-  color: black;
-}
+
 a {
   margin: 0 10px;
   text-decoration: none;
   cursor: pointer;
   color: black;
+  transition: all 0.2s;
 }
 .a-group:hover {
   color: #f44336;
+}
+/* .headerShowSmallScreen {
+  display: none;
+} */
+
+@media screen and (min-width: 768px) {
+  .headerShowLargeScreen {
+    display: block;
+  }
+  .fixed-top {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .headerShowLargeScreen {
+    display: none;
+  }
+  .fixed-top {
+    display: block;
+  }
 }

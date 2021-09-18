@@ -2,11 +2,18 @@
   background-color: #222;
   color: #949494;
 }
+.footer {
+  padding-top: 20px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
 a {
   display: block;
   text-decoration: none;
   margin-bottom: 12px;
 }
 .title {
-    color: white;
+  color: white;
 }

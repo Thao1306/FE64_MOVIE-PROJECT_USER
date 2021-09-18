@@ -1,122 +1,50 @@
 <!-- Movie Block -->
-<div *ngIf="isLoading; else movieBlock" class="container text-center my-5">
-  <div class="spinner-border text-danger" role="status">
-    <span class="sr-only">Loading...</span>
+<div id="movieBlock">
+  <div *ngIf="isLoading; else movieBlock" class="container text-center my-5">
+    <div class="spinner-border text-danger" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
-</div>
-<ng-template #movieBlock>
-  <div class="container movieBlock">
-    <mat-tab-group mat-align-tabs="center" color="warn">
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <h1>Đang chiếu</h1>
-        </ng-template>
-        <div class="showMovie">
-          <ngx-slick-carousel
-            class="carousel"
-            #slickModal1="slick-carousel"
-            [config]="slideConfig"
-          >
-            <div
-              ngxSlickItem
-              *ngFor="let showingMovie of nowShowingList"
-              class="slide"
+  <ng-template #movieBlock>
+    <div class="container bannerHeader"></div>
+    <div class="container movieBlock">
+      <div class="tab">
+        <ul class="nav nav-tabs justify-content-center">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              id="showing-tab"
+              data-toggle="tab"
+              role="tab"
+              aria-selected="true"
+              (click)="handleTab(0)"
+              >Đang chiếu</a
             >
-              <div class="movieContent">
-                <div class="movieImage">
-                  <img
-                  class="imgMovie"
-                    src="{{ showingMovie.hinhAnh }}"
-                    alt=""   
-                    width="215px"
-                    height="318px"                 
-                  />
-                  <a
-                    class="play-button"
-                    (click)="openModalShowing(showingMovie.maPhim.toString())"
-                  >
-                    <i class="fas fa-play"></i>
-                  </a>
-                </div>
-                <div class="movieInfo">
-                  <div class="movieTitle">
-                    <span *ngIf="showingMovie.hot" class="hotMovie">HOT</span>
-                    <span class="title">{{ showingMovie.tenPhim }}</span>
-                  </div>
-  
-                  <p class="movieRating">Đánh giá: {{ showingMovie.danhGia }}</p>
-                </div>
-              </div>
-            </div>
-          </ngx-slick-carousel>
-        </div>
-      </mat-tab>
-  
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <h1>Sắp chiếu</h1>
-        </ng-template>
-        <div class="showMovie">
-          <ngx-slick-carousel
-            class="carousel"
-            #slickModal2="slick-carousel"
-            [config]="slideConfig"
-          >
-            <div
-              ngxSlickItem
-              *ngFor="let comingMovie of comingSoonList"
-              class="slide"
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              id="coming-tab"
+              data-toggle="tab"
+              role="tab"
+              aria-selected="false"
+              (click)="handleTab(1)"
+              >Sắp chiếu</a
             >
-              <div class="movieContent">
-                <div class="movieImage">
-                  <img
-                  class="imgMovie"
-                    src="{{ comingMovie.hinhAnh }}"
-                    alt=""
-                    width="215px"
-                    height="318px"
-                  />
-                  <a
-                    class="play-button"
-                    (click)="openModalComing(comingMovie.maPhim.toString())"
-                  >
-                    <i class="fas fa-play"></i>
-                  </a>
-                </div>
-                <div class="movieInfo">
-                  <div class="movieTitle">
-                    <span *ngIf="comingMovie.hot" class="hotMovie">HOT</span>
-                    <span class="title">{{ comingMovie.tenPhim }}</span>
-                  </div>
-                  <p class="movieRating">Đánh giá: {{ comingMovie.danhGia }}</p>
-                </div>
-              </div>
-            </div>
-          </ngx-slick-carousel>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
-</ng-template>
+          </li>
+        </ul>
+      </div>
 
-<!-- Modal_Movie Block -->
-<jw-modal id="custom-modal-2">
-  <div style="background-color: black; opacity: 0.75; text-align: right">
-    <button
-      (click)="closeModal('custom-modal-2')"
-      class="btn"
-      style="color: white; line-height: 0"
-    >
-      <mat-icon>highlight_off</mat-icon>
-    </button>
-  </div>
-  <div class="embed-responsive embed-responsive-16by9">
-    <iframe
-      class="embed-responsive-item"
-      [src]="movieTrailer"
-      title="YouTube video player"
-      allowfullscreen
-    ></iframe>
-    <img [src]="movieImg" />
-  </div>
-</jw-modal>
+      <app-movie-showing
+        *ngIf="active"
+        id="tabShowingFilm"
+        [nowShowingList]="nowShowingList"
+      ></app-movie-showing>
+      <app-movie-coming
+        *ngIf="!active"
+        id="tabComingFilm"
+        [comingSoonList]="comingSoonList"
+      ></app-movie-coming>
+    </div>
+  </ng-template>
+</div>

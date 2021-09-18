@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChildren } from '@angular/core';
 import {
   ICinema,
   ICinemaBranch,
@@ -8,15 +8,17 @@ import {
 import { CinemaApiService } from 'src/app/services/cinema-api.service';
 import { CinemaService } from 'src/app/services/cinema.service';
 import * as dayjs from 'dayjs';
-import { Router } from '@angular/router';
+import { Event, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-theaters-show-times',
   templateUrl: './theaters-show-times.component.html',
   styleUrls: ['./theaters-show-times.component.css'],
 })
-export class TheatersShowTimesComponent implements OnInit {
+export class TheatersShowTimesComponent implements OnInit, OnDestroy {
+  isLoading: boolean = true;
   cinemaList: ICinema[] = [];
   cinemaId: string = '';
   cinemaBranchId: string = '';
@@ -26,6 +28,12 @@ export class TheatersShowTimesComponent implements OnInit {
   showTimeFilmList: IShowTimeFilm[] = [];
   selectedMovie: any;
   filmItemId: string | undefined = '';
+  checkBookingSelected: boolean = false;
+  fetchCinemasSubscription: Subscription | undefined;
+  fetchCinemaSystemSubscription: Subscription | undefined;
+  cinemaBranchListSubscription: Subscription | undefined;
+  cinemaListSubscription: Subscription | undefined;
+
   @ViewChildren('film') bookingForm!: any;
 
   constructor(
@@ -33,37 +41,44 @@ export class TheatersShowTimesComponent implements OnInit {
     private cinemaApiSv: CinemaApiService,
     private router: Router
   ) {}
+
   setActive = (item: number) => {
     if (item === 0) return true;
     return false;
   };
 
   fetchCinemas = () => {
-    this.cinemaApiSv.fetchCinemas().subscribe(
+    this.fetchCinemasSubscription = this.cinemaApiSv.fetchCinemas().subscribe(
       (res) => {
-        this.cinemaSv.setCinemas(res.content);
+        const cinemaList = res.content;
+        this.cinemaSv.setCinemas(cinemaList);
+        this.handleCinemaSelected(cinemaList[0].maHeThongRap);
+        this.isLoading = false;
       },
       (err) => console.log(err)
     );
   };
 
   fetchCinemaBranch = (cinemaSystemId: string) => {
-    this.cinemaApiSv.fetchCinemaSystem(cinemaSystemId).subscribe(
-      (res) => {
-        this.cinemaSv.setCinemaBranch(res.content[0].lstCumRap);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.fetchCinemaSystemSubscription = this.cinemaApiSv
+      .fetchCinemaSystem(cinemaSystemId)
+      .subscribe(
+        (res) => {
+          this.cinemaSv.setCinemaBranch(res.content[0].lstCumRap);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   };
 
   getCinemaBranchList = () => {
-    this.cinemaSv.cinemaBranchList.subscribe(
-      (cinemaBranchs: ICinemaBranch[]) => {
-        this.cinemaBranchList = cinemaBranchs;
-      }
-    );
+    this.cinemaBranchListSubscription =
+      this.cinemaSv.cinemaBranchList.subscribe(
+        (cinemaBranchs: ICinemaBranch[]) => {
+          this.cinemaBranchList = cinemaBranchs;
+        }
+      );
   };
 
   handleCinemaSelected = (cinemaSystemId: string) => {
@@ -72,7 +87,7 @@ export class TheatersShowTimesComponent implements OnInit {
     this.cinemaId = cinemaSystemId;
   };
 
-  cinemaBranchSelected = (cinemaBranchId: string) => {
+  handleCinemaBranchSelected = (cinemaBranchId: string) => {
     this.cinemaBranchId = cinemaBranchId;
     const cinemaBranch = this.cinemaBranchList.find(
       (item) => item.maCumRap === cinemaBranchId
@@ -106,14 +121,28 @@ export class TheatersShowTimesComponent implements OnInit {
     const ngFormSelected = this.bookingForm._results.find(
       (ngFom: NgForm) => ngFom.submitted === true
     );
-    const showTimeFilmId = ngFormSelected.value.showTimeFilm;
-    this.router.navigate([`/datve/${showTimeFilmId}`]);
+
+    let showTimeFilmId = ngFormSelected.value.showTimeFilm;
+
+    if (showTimeFilmId === '') {
+      this.checkBookingSelected = true;
+    } else {
+      this.router.navigate([`/datve/${showTimeFilmId}`]);
+    }
   };
 
   ngOnInit(): void {
     this.fetchCinemas();
-    this.cinemaSv.cinemaList.subscribe((cinemas: ICinema[]) => {
-      this.cinemaList = cinemas;
-    });
+    this.cinemaListSubscription = this.cinemaSv.cinemaList.subscribe(
+      (cinemas: ICinema[]) => {
+        this.cinemaList = cinemas;
+      }
+    );
+  }
+  ngOnDestroy(): void {
+    this.fetchCinemaSystemSubscription?.unsubscribe;
+    this.fetchCinemasSubscription?.unsubscribe;
+    this.cinemaBranchListSubscription?.unsubscribe;
+    this.cinemaListSubscription?.unsubscribe;
   }
 }

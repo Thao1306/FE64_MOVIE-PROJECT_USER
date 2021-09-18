@@ -1,34 +1,103 @@
-<mat-toolbar class="header">
-  <mat-toolbar-row>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>movie</mat-icon>
-    </button>
-    <span>Booking Ticket</span>
+<div #headerBlock>
+  <mat-toolbar class="headerShowLargeScreen">
+    <mat-toolbar-row>
+      <button
+        mat-icon-button
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="handleClickOnTop()"
+      >
+        <img
+          src="./../../../../assets/Capture-removebg-preview.png"
+          width="100%"
+        />
+      </button>
 
-    <span class="example-spacer"></span>
-    <div class="d-flex">
-      <a class="a-group">Lịch chiếu</a>
-      <a class="a-group">Cụm rạp</a>
+      <span class="example-spacer"></span>
+
+      <div class="d-flex">
+        <a
+          class="a-group"
+          href="#movieBlock"
+          data-scroll="movieBlock"
+          >Lịch chiếu</a
+        >
+        <a class="a-group" href="#cinemaBlock">Cụm rạp</a>
+      </div>
+
+      <span class="example-spacer"></span>
+
+      <button *ngIf="loggedInUser; else authBtn" mat-button>
+        Hello! {{ loggedInUser?.hoTen }} ^-^
+      </button>
+
+      <ng-template #authBtn>
+        <button mat-button routerLink="/signin" routerLinkActive="active">
+          <mat-icon>account_circle</mat-icon>
+          <span style="margin-left: 5px">Đăng nhập</span>
+        </button>
+        <button mat-button routerLink="/signup" routerLinkActive="active">
+          <mat-icon>app_registration</mat-icon>
+          <span style="margin-left: 5px">Đăng ký</span>
+        </button>
+      </ng-template>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="fixed-top">
+    <nav class="navbar navbar-light bg-light">
+      <button
+        mat-icon-button
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <img
+          src="./../../../../assets/Capture-removebg-preview.png"
+          width="100%"
+        />
+      </button>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarToggleExternalContent"
+        aria-controls="navbarToggleExternalContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+    <div
+      class="collapse"
+      id="navbarToggleExternalContent"
+      style="background-color: white"
+    >
+      <div class="p-4 d-flex flex-column text-right">
+        <div class="my-1">
+          <a class="a-group" href="#movieBlock">Lịch chiếu</a>
+        </div>
+        <div class="my-1">
+          <a class="a-group" href="#cinemaBlock">Cụm rạp</a>
+        </div>
+        <div class="my-1">
+          <a *ngIf="loggedInUser; else authBtnResponsive" mat-button>
+            Hello! {{ loggedInUser?.hoTen }} ^-^
+          </a>
+
+          <ng-template #authBtnResponsive>
+            <a routerLink="/signin" routerLinkActive="active" class="a-group"
+              >Đăng nhập</a
+            >
+
+            <a routerLink="/signup" routerLinkActive="active" class="a-group"
+              >Đăng ký</a
+            >
+          </ng-template>
+        </div>
+      </div>
     </div>
-    <span class="example-spacer"></span>
-
-    <button mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">
-      <mat-icon>home</mat-icon>
-      <span style="margin-left: 5px;">Trang chủ</span>
-    </button>
-
-    <button *ngIf="loggedInUser; else authBtn" mat-button>Hello! {{ loggedInUser?.hoTen}} ^-^</button>
-
-    <ng-template #authBtn>
-      <button mat-button routerLink="/signin" routerLinkActive="active">
-        <mat-icon>account_circle</mat-icon>
-        <span style="margin-left: 5px;">Đăng nhập</span>
-      </button>
-      <button mat-button routerLink="/signup" routerLinkActive="active">
-        <mat-icon>app_registration</mat-icon>
-        <span style="margin-left: 5px;">Đăng ký</span>
-      </button>
-    </ng-template>
-
-  </mat-toolbar-row>
-</mat-toolbar>
+  </div>
+</div>

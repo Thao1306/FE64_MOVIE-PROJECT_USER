@@ -1,1 +1,76 @@
-<p>detail-index works!</p>
+<div class="detailMovieBlock">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="movieImage" (click)="openModal('custom-modal-detail')">
+          <img [src]="movieDetail?.hinhAnh" />
+
+          <a class="play-button">
+            <i class="fas fa-play"></i>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-8 movieInfoParent">
+        <span style="font-size: 20px">{{
+          formatDateShowing(movieDetail?.ngayKhoiChieu)
+        }}</span>
+        <div class="movieInfoChild">
+          <div class="movieTitle">
+            <span *ngIf="movieDetail?.hot" class="hotMovie">HOT</span>
+            <span class="title text-black">{{ movieDetail?.tenPhim }}</span>
+          </div>
+          <span style="font-size: 20px"
+            >Rating: {{ movieDetail?.danhGia }} / 10</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div>
+        <h1 class="title">Thông tin</h1>
+      </div>
+      <table class="table text-center text-white">
+        <thead>
+          <tr>
+            <th>Ngày công chiếu</th>
+            <th class="hideResponsive">Nội dung</th>
+            <th>Đánh giá</th>
+            <th>Khởi chiếu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ formatDateShowing(movieDetail?.ngayKhoiChieu) }}</td>
+            <td class="hideResponsive">{{ movieDetail?.moTa }}</td>
+            <td>{{ movieDetail?.danhGia }} / 10</td>
+            <td *ngIf="movieDetail?.dangChieu; else coming">Đang chiếu</td>
+            <ng-template #coming>
+              <td>Sắp chiếu</td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal_Movie Block -->
+<jw-modal id="custom-modal-detail">
+  <div style="background-color: black; opacity: 0.75; text-align: right">
+    <button
+      (click)="closeModal('custom-modal-detail')"
+      class="btn"
+      style="color: white; line-height: 0"
+    >
+      <mat-icon>highlight_off</mat-icon>
+    </button>
+  </div>
+  <div class="embed-responsive embed-responsive-16by9">
+    <iframe
+      #trailer
+      class="embed-responsive-item"
+      [title]="movieDetail?.tenPhim"
+      allowfullscreen
+    ></iframe>
+  </div>
+</jw-modal>

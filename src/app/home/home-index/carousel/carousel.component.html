@@ -24,7 +24,6 @@
         <div
           class="carousel-item"
           [ngClass]="{ active: setActive(item) }"
-          (click)="openModal('custom-modal-1')"
         >
           <img [src]="item.hinhAnh" class="banner-img img-fluid" alt="..." />
         </div>
@@ -50,24 +49,3 @@
     </a>
   </div>
 </ng-template>
-<!-- DEMO -->
-<!-- Modal_Carousel -->
-<jw-modal id="custom-modal-1">
-  <div style="background-color: black; opacity: 0.75; text-align: right">
-    <button
-      (click)="closeModal('custom-modal-1')"
-      class="btn"
-      style="color: white; line-height: 0"
-    >
-      <mat-icon>highlight_off</mat-icon>
-    </button>
-  </div>
-  <div class="embed-responsive embed-responsive-16by9">
-    <iframe
-      class="embed-responsive-item"
-      src="https://www.youtube.com/embed/o7cA0MtTuYw"
-      title="YouTube video player"
-      allowfullscreen
-    ></iframe>
-  </div>
-</jw-modal>

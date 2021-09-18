@@ -1,0 +1,35 @@
+<div class="showMovie">
+  <ngx-slick-carousel
+    class="carousel"
+    #slickModal="slick-carousel"
+    [config]="slideConfig"
+  >
+    <div ngxSlickItem *ngFor="let movie of nowShowingList" class="slide">
+      <app-movie-item
+        [movie]="movie"
+        (selectedMovie)="openModalShowing($event)"
+      ></app-movie-item>
+    </div>
+  </ngx-slick-carousel>
+</div>
+
+<!-- Modal_Movie Block -->
+<jw-modal id="custom-modal-movie">
+  <div style="background-color: black; opacity: 0.75; text-align: right">
+    <button
+      (click)="closeModal('custom-modal-movie')"
+      class="btn"
+      style="color: white; line-height: 0"
+    >
+      <mat-icon>highlight_off</mat-icon>
+    </button>
+  </div>
+  <div class="embed-responsive embed-responsive-16by9">
+    <iframe
+      #trailer
+      class="embed-responsive-item"
+      title="YouTube video player"
+      allowfullscreen
+    ></iframe>
+  </div>
+</jw-modal>

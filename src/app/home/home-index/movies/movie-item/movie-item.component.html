@@ -1,0 +1,22 @@
+<div class="movieContent">
+  <div class="movieImage" (click)="openMovieTrailer(movie.trailer)">
+    <img
+      class="imgMovie"
+      src="{{ movie.hinhAnh }}"
+      alt=""
+      width="215px"
+      height="318px"
+    />
+    <a class="play-button">
+      <i class="fas fa-play"></i>
+    </a>
+  </div>
+  <div class="movieInfo" (click)="navigateToDetail(movie.maPhim)">
+    <div class="movieTitle">
+      <span *ngIf="movie.hot" class="hotMovie">HOT</span>
+      <span class="title">{{ movie.tenPhim }}</span>
+    </div>
+
+    <p class="movieRating">Đánh giá: {{ movie.danhGia }}</p>
+  </div>
+</div>
