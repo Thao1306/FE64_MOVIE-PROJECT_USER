@@ -7,14 +7,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./ghe.component.css']
 })
 export class GheComponent implements OnInit {
-  @Input() seat!: ISeat;
+  @Input() seatList!: ISeat;
   @Output() bookSeat = new EventEmitter();
   isBooking: boolean = false;
 
   constructor() { }
 
   handleBookSeat() {
-    this.bookSeat.emit(this.seat);
+    this.bookSeat.emit(this.seatList);
     this.isBooking = !this.isBooking;
   }
 

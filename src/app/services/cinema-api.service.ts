@@ -1,3 +1,4 @@
+import { IShowTimeFilm, IBookingTicket } from './../models/cinema';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -24,4 +25,24 @@ export class CinemaApiService {
       }
     );
   };
+
+  fetchSeatList = (showTimeId: string): Observable<any> => {
+    return this.http.get(
+      'https://movienew.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe',
+      {
+      params: {
+        maLichChieu: showTimeId,
+      },
+    }
+    );
+  }
+
+  Booking(bookingticket: IBookingTicket): Observable<any> {
+    return this.http.post(
+      'https://movienew.cybersoft.edu.vn/api/QuanLyDatVe/DatVe',
+      bookingticket,
+    );
+  }
+
+
 }
