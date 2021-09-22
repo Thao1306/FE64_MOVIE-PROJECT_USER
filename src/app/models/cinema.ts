@@ -31,3 +31,13 @@ export interface IShowTimeFilm {
   ngayChieu?: string;
   gioChieu?: string;
 }
+
+export interface IBookingTicket {
+  maLichChieu: number;
+  danhSachPhim: [
+    {
+      "maGhe": number,
+      "giaVe": number
+    }
+  ];
+}

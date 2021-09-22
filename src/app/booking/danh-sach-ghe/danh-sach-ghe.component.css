@@ -6,3 +6,9 @@
   font-size: 30px;
   margin-bottom: 15px;
 }
+
+.btn-group {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}

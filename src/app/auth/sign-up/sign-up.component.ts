@@ -21,15 +21,15 @@ export class SignUpComponent implements OnInit {
     this.authApiSv.signUp(newUser).subscribe(
       (res) => {
         console.log(res);
-        this.router.navigate(['/signin']);
+        this.router.navigate(['../signin']);
       },
       (err) => {
         console.log(err);
       }
     );
 
-    // console.log(this.signupForm);
-    // console.log(this.signupForm.value);
+    console.log(this.signupForm);
+    console.log(this.signupForm.value);
   }
 
 }
