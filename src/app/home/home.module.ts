@@ -15,10 +15,11 @@ import { ComponentsModule } from '../components/components.module';
 import { MovieItemComponent } from './home-index/movies/movie-item/movie-item.component';
 import { MovieShowingComponent } from './home-index/movies/movie-showing/movie-showing.component';
 import { MovieComingComponent } from './home-index/movies/movie-coming/movie-coming.component';
+import { SafePipeModule } from 'safe-pipe';
 
 @NgModule({
   declarations: [HomeIndexComponent, CarouselComponent, MoviesComponent, TheatersShowTimesComponent, MovieItemComponent, MovieShowingComponent, MovieComingComponent],
-  imports: [CommonModule, RouterModule, MatIconModule, MatTabsModule, SlickCarouselModule, MatListModule, MatSelectModule, FormsModule, ComponentsModule],
+  imports: [CommonModule, RouterModule, MatIconModule, MatTabsModule, SlickCarouselModule, MatListModule, MatSelectModule, FormsModule, ComponentsModule,SafePipeModule],
   // exports: [HomeIndexComponent],
 })
 export class HomeModule {}

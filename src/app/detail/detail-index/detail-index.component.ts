@@ -18,8 +18,9 @@ export class DetailIndexComponent implements OnInit {
     private movieSv: MoviesService,
     private modalSv: ModalService
   ) {}
+
   movieDetail: IMovie | null | undefined;
-  @ViewChild('trailer') trailer: any;
+  // @ViewChild('trailer') trailer: any;
   srcTrailer: string = '';
 
   fetchMovieDetail = () => {
@@ -40,10 +41,10 @@ export class DetailIndexComponent implements OnInit {
   };
 
   openModal = (id: string) => {
-    this.trailer.nativeElement.src = this.movieDetail?.trailer;
+    // this.trailer.nativeElement.src = this.movieDetail?.trailer;
     this.modalSv.open(id);
   };
-  
+
   closeModal = (id: string) => {
     this.modalSv.close(id);
   };

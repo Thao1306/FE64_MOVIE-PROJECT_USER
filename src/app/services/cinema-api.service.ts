@@ -30,19 +30,22 @@ export class CinemaApiService {
     return this.http.get(
       'https://movienew.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe',
       {
-      params: {
-        maLichChieu: showTimeId,
-      },
-    }
+        params: {
+          maLichChieu: showTimeId,
+        },
+      }
     );
-  }
+  };
 
-  Booking(bookingticket: IBookingTicket): Observable<any> {
+  // ---- PHẦN ĐƯỢC THÊM ----
+  // chỉnh sửa kiểu dữ liệu của bookingticket
+  Booking(bookingticket: {
+    maLichChieu: number;
+    danhSachVe: { maGhe: number; giaVe: number }[];
+  }): Observable<any> {
     return this.http.post(
       'https://movienew.cybersoft.edu.vn/api/QuanLyDatVe/DatVe',
-      bookingticket,
+      bookingticket
     );
   }
-
-
 }

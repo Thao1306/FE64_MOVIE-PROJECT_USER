@@ -31,6 +31,7 @@
         class="embed-responsive-item"
         title="YouTube video player"
         allowfullscreen
+        [src]="trailerMovie | safe: 'resourceUrl'"
       ></iframe>
     </div>
   </jw-modal>

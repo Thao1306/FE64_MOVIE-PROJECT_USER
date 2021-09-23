@@ -9,9 +9,10 @@ import { IMovie } from 'src/app/models/movies';
 })
 export class MovieComingComponent implements OnInit {
   @Input() comingSoonList: IMovie[] = [];
-  constructor(private modalSv: ModalService) {}
+  // @ViewChild('trailer') trailer: any;
 
-  @ViewChild('trailer') trailer: any;
+  constructor(private modalSv: ModalService) {}
+  trailerMovie: string = ""
 
   slideConfig = {
     slidesToShow: 4,
@@ -46,7 +47,8 @@ export class MovieComingComponent implements OnInit {
   };
 
   openModalShowing = (trailerSrc: string) => {
-    this.trailer.nativeElement.src = trailerSrc;
+    // this.trailer.nativeElement.src = trailerSrc;
+    this.trailerMovie = trailerSrc
 
     setTimeout(() => {
       this.modalSv.open('custom-modal-movie');
