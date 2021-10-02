@@ -1,37 +1,42 @@
-<div class="container ">
+<div class="container">
   <div class="row mat-display-2 mt-5">
-
+    <div class="col-8 mx-auto bg-light p-4 text-center">
+      <div class="screen">Màn hình</div>
+      <app-ghe
+        (bookSeat)="setBookingSeats($event)"
+        [seatList]="item"
+        *ngFor="let item of seatList"
+      ></app-ghe>
+    </div>
     <form class="w-100" #bookingForm="ngForm" (submit)="handleBooking()">
-
-      <div class="col-8 mx-auto bg-light p-4 text-center">
-        <div class="screen">Màn hình</div>
-        <app-ghe (bookSeat)="setBookingSeats($event)" [seatList]="item" *ngFor="let item of seatList "></app-ghe>
-      </div>
-
       <div class="col-12">
         <!-- Đặt vé ({{bookingSeats.length}}) -->
-        <br>
-        <hr>
-        <p class="text-center">{{showTimeFilmList?.tenPhim}}</p>
-        <br>
-        Ngày chiếu : {{showTimeFilmList?.ngayChieu}}
-        <br>
-        <br>
-        Giờ chiếu : {{showTimeFilmList?.gioChieu}}
-        <br>
-        <br>
-        Tên cụm rạp : {{showTimeFilmList?.tenCumRap}}
-        <br>
-        <br>
-        Tên rạp : {{showTimeFilmList?.tenRap}}
-        <br>
-        <br>
+        <br />
+        <hr />
+        <p class="text-center">{{ showTimeFilmList?.tenPhim }}</p>
+        <br />
+        Ngày chiếu : {{ showTimeFilmList?.ngayChieu }}
+        <br />
+        <br />
+        Giờ chiếu : {{ showTimeFilmList?.gioChieu }}
+        <br />
+        <br />
+        Tên cụm rạp : {{ showTimeFilmList?.tenCumRap }}
+        <br />
+        <br />
+        Tên rạp : {{ showTimeFilmList?.tenRap }}
+        <br />
+        <br />
         <p *ngFor="let item of bookingSeats">
-          Ghế chọn : {{ item.tenGhe }} ,
-          Giá vé : {{ item.giaVe }}VND
-          <span (click)="cancelSeat(item.stt)" class="text-warning" style="cursor: pointer">[Huỷ]</span>
-          <br>
-          <br>
+          Ghế chọn : {{ item.tenGhe }} , Giá vé : {{ item.giaVe }}VND
+          <span
+            (click)="cancelSeat(item.stt)"
+            class="text-warning"
+            style="cursor: pointer"
+            >[Huỷ]</span
+          >
+          <br />
+          <br />
         </p>
       </div>
 
