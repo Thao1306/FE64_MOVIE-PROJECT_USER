@@ -27,4 +27,11 @@ export class AuthAPIService {
       undefined,
     )
   }
+
+  editUser = (body: any): Observable<any> => {
+    return this.http.put(
+      'https://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung',
+      body
+    );
+  };
 }

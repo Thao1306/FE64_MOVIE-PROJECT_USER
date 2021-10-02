@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { AuthAPIService } from './services/auth-api.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +13,17 @@ export class AppComponent {
   onActivate(event: any) {
     window.scroll(0, 0);
   }
+
+    constructor(private authApiSv: AuthAPIService, private authSv: AuthService) {}
+
+  // ngOnInit() {
+  //   if (localStorage.getItem('t')) {
+  //     this.authApiSv.fetchProfile().subscribe(
+  //       (res) => {
+  //         this.authSv.setMe(res.content);
+  //       },
+  //       (err) => {}
+  //     );
+  //   }
+  // }
 }

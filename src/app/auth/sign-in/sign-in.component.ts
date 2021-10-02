@@ -11,7 +11,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
   @ViewChild('signinForm') signinForm!: NgForm;
-  constructor(private authApiSv: AuthAPIService, private authSv: AuthService) { }
+  constructor(private authApiSv: AuthAPIService, private authSv: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -24,9 +24,11 @@ export class SignInComponent implements OnInit {
         // console.log(res);
         this.authSv.setMe(res.content);
         localStorage.setItem('t', res.content.accessToken);
+        this.router.navigate([`/`]);
       },
       (err) => {
         console.log(err);
+        alert('Tài khoản hoặc mật khẩu không đúng !!');
       }
     );
 
