@@ -24,7 +24,7 @@ export class DanhSachGheComponent implements OnInit {
     private cinemaApiSv: CinemaApiService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   fetchSeatSubscription: Subscription | undefined;
   seatListSubscription: Subscription | undefined;
@@ -38,14 +38,14 @@ export class DanhSachGheComponent implements OnInit {
     maLichChieu: number;
     danhSachVe: { maGhe: number; giaVe: number }[];
   } = {
-    maLichChieu: 0,
-    danhSachVe: [
-      {
-        maGhe: 0,
-        giaVe: 0,
-      },
-    ],
-  };
+      maLichChieu: 0,
+      danhSachVe: [
+        {
+          maGhe: 0,
+          giaVe: 0,
+        },
+      ],
+    };
 
 
   @ViewChildren('bookingForm') bookingForm!: any;
@@ -128,19 +128,18 @@ export class DanhSachGheComponent implements OnInit {
         console.log(this.bookingSeats);
       }
     );
+
   }
 
   handleBooking(): void {
-  // ---- PHẦN ĐƯỢC THÊM ----
+    // ---- PHẦN ĐƯỢC THÊM ----
     this.bookingSeatsObjSendBackEnd.maLichChieu = parseInt(this.showTimeId)
-  this.bookingSeatsObjSendBackEnd.danhSachVe =   this.bookingSeats.map((item) => {
-    let maGhe: number = item.maGhe
-    let giaVe: number = item.giaVe
-
-      return {maGhe, giaVe}
+    this.bookingSeatsObjSendBackEnd.danhSachVe = this.bookingSeats.map((item) => {
+      let maGhe: number = item.maGhe
+      let giaVe: number = item.giaVe
+        return { maGhe, giaVe }
     })
     console.log(this.bookingSeatsObjSendBackEnd);
-        
 
     const newTicket = { ...this.bookingForm.value, maLichChieu: '0' };
     this.cinemaApiSv.Booking(this.bookingSeatsObjSendBackEnd).subscribe(
@@ -155,7 +154,7 @@ export class DanhSachGheComponent implements OnInit {
     console.log(this.bookingForm.value);
   }
 
-  //lifecycle chạy lúc component hủy (tương ứng với willUnMount của react)
+  //lifecycle chạy lúc component hủy sou(tương ứng với willUnMount của react)
   ngOnDestroy() {
     this.fetchSeatSubscription?.unsubscribe();
     this.seatListSubscription?.unsubscribe();
