@@ -28,5 +28,15 @@ export interface IShowTicket {
   tenGhe: string;
   tenHeThongRap: string;
   tenRap: string;
-
+  danhSachGhe?: seatList[];
+}
+export interface seatList {
+  maCumRap: string;
+  maGhe: string;
+  maHeThongRap: string;
+  maRap: string;
+  tenCumRap: string;
+  tenGhe: string;
+  tenHeThongRap: string;
+  tenRap: string;
 }

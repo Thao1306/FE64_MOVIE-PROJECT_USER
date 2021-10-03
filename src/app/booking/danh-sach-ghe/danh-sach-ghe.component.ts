@@ -24,29 +24,29 @@ export class DanhSachGheComponent implements OnInit {
     private cinemaApiSv: CinemaApiService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   fetchSeatSubscription: Subscription | undefined;
   seatListSubscription: Subscription | undefined;
 
   seatList: ISeat[] = [];
   showTimeFilmList: any;
-  showTimeId: string = ''
+  showTimeId: string = '';
+  tongTien: number | string = 0;
 
   // ---- PHẦN ĐƯỢC THÊM ----
   bookingSeatsObjSendBackEnd: {
     maLichChieu: number;
     danhSachVe: { maGhe: number; giaVe: number }[];
   } = {
-      maLichChieu: 0,
-      danhSachVe: [
-        {
-          maGhe: 0,
-          giaVe: 0,
-        },
-      ],
-    };
-
+    maLichChieu: 0,
+    danhSachVe: [
+      {
+        maGhe: 0,
+        giaVe: 0,
+      },
+    ],
+  };
 
   @ViewChildren('bookingForm') bookingForm!: any;
 
@@ -57,7 +57,6 @@ export class DanhSachGheComponent implements OnInit {
       .subscribe(
         (res: any) => {
           this.cinemaSv.setSeatList(res.content.danhSachGhe);
-          console.log(res);
         },
         (err) => {
           console.log(err);
@@ -72,7 +71,6 @@ export class DanhSachGheComponent implements OnInit {
       .subscribe(
         (res: any) => {
           this.cinemaSv.setShowTimeFilmList(res.content.thongTinPhim);
-          console.log(res);
         },
         (err) => {
           console.log(err);
@@ -95,6 +93,14 @@ export class DanhSachGheComponent implements OnInit {
     } else {
       this.bookingSeats.push(seatList);
     }
+    // const a = this.bookingSeats.forEach((item) => {
+    //   return this.tongTien +=item.giaVe
+    // })
+    let tong: number = 0;
+    for (let item of this.bookingSeats) {
+      tong += item.giaVe;
+    }
+    this.tongTien = tong.toLocaleString();
   }
 
   cancelSeat(id: string) {
@@ -112,11 +118,9 @@ export class DanhSachGheComponent implements OnInit {
 
   ngOnInit() {
     this.fetchSeatList();
-    console.log(this.cinemaSv.seatList);
     this.seatListSubscription = this.cinemaSv.seatList.subscribe(
       (seatList: ISeat[]) => {
         this.seatList = seatList;
-        console.log(this.seatList);
       }
     );
 
@@ -124,34 +128,31 @@ export class DanhSachGheComponent implements OnInit {
     this.seatListSubscription = this.cinemaSv.showTimeFilmList.subscribe(
       (showTimeFilmList: any) => {
         this.showTimeFilmList = showTimeFilmList;
-        console.log(this.showTimeFilmList);
-        console.log(this.bookingSeats);
       }
     );
-
   }
 
   handleBooking(): void {
     // ---- PHẦN ĐƯỢC THÊM ----
-    this.bookingSeatsObjSendBackEnd.maLichChieu = parseInt(this.showTimeId)
-    this.bookingSeatsObjSendBackEnd.danhSachVe = this.bookingSeats.map((item) => {
-      let maGhe: number = item.maGhe
-      let giaVe: number = item.giaVe
-        return { maGhe, giaVe }
-    })
+    this.bookingSeatsObjSendBackEnd.maLichChieu = parseInt(this.showTimeId);
+    this.bookingSeatsObjSendBackEnd.danhSachVe = this.bookingSeats.map(
+      (item) => {
+        let maGhe: number = item.maGhe;
+        let giaVe: number = item.giaVe;
+        return { maGhe, giaVe };
+      }
+    );
     console.log(this.bookingSeatsObjSendBackEnd);
 
     const newTicket = { ...this.bookingForm.value, maLichChieu: '0' };
     this.cinemaApiSv.Booking(this.bookingSeatsObjSendBackEnd).subscribe(
       (res) => {
-        console.log(res);
+        alert('Đặt vé thành công');
       },
       (err) => {
         console.log(err);
       }
     );
-    console.log(this.bookingForm);
-    console.log(this.bookingForm.value);
   }
 
   //lifecycle chạy lúc component hủy sou(tương ứng với willUnMount của react)

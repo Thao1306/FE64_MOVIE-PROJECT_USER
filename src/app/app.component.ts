@@ -16,14 +16,14 @@ export class AppComponent {
 
     constructor(private authApiSv: AuthAPIService, private authSv: AuthService) {}
 
-  // ngOnInit() {
-  //   if (localStorage.getItem('t')) {
-  //     this.authApiSv.fetchProfile().subscribe(
-  //       (res) => {
-  //         this.authSv.setMe(res.content);
-  //       },
-  //       (err) => {}
-  //     );
-  //   }
-  // }
+  ngOnInit() {
+    if (localStorage.getItem('t')) {
+      this.authApiSv.fetchProfile().subscribe(
+        (res) => {
+          this.authSv.setMe(res.content);
+        },
+        (err) => {}
+      );
+    }
+  }
 }

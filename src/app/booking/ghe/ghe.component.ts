@@ -10,12 +10,12 @@ export class GheComponent implements OnInit {
   @Input() seatList!: ISeat;
   @Output() bookSeat = new EventEmitter();
   isBooking: boolean = false;
-
   constructor() { }
 
   handleBookSeat() {
     this.bookSeat.emit(this.seatList);
     this.isBooking = !this.isBooking;
+    
   }
 
   ngOnInit(): void {

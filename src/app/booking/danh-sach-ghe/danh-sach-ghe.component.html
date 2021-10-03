@@ -29,15 +29,17 @@
         <br />
         <p *ngFor="let item of bookingSeats">
           Ghế chọn : {{ item.tenGhe }} , Giá vé : {{ item.giaVe }}VND
-          <span
+          <!-- <span
             (click)="cancelSeat(item.stt)"
             class="text-warning"
             style="cursor: pointer"
             >[Huỷ]</span
-          >
+          > -->
           <br />
           <br />
         </p>
+        <hr />
+        <p>Tổng tiền thanh toán: {{ tongTien }}</p>
       </div>
 
       <div class="btn-group">

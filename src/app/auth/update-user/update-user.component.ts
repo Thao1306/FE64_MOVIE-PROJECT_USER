@@ -35,7 +35,6 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
 
   handleSubmit() {
     this.userInfo = { ...this.userInfo };
-    console.log(this.userInfo);
     if (this.editUser.form.invalid) {
       alert('Thông tin bắt buộc không được để trống');
     } else {
@@ -56,9 +55,8 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
 
   fetchProfile = () => {
     this.fetchProfileSubscription = this.authApiSv.fetchProfile().subscribe(
-      (res:any) => {
+      (res: any) => {
         this.authSv.setMe(res.content);
-        console.log(res);
       },
       (err) => {
         console.log(err);
@@ -68,10 +66,9 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
 
   fetchShowTicket = () => {
     this.fetchProfileSubscription = this.authApiSv.fetchProfile().subscribe(
-      (res:any) => {
+      (res: any) => {
         this.authSv.setShowTicket(res.content.thongTinDatVe);
         this.showSeat = res.content.thongTinDatVe[0].danhSachGhe;
-        console.log(res);
       },
       (err) => {
         console.log(err);
@@ -79,36 +76,30 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
     );
   };
 
-
   ngOnInit(): void {
     this.fetchProfile();
-    console.log(this.authSv.me);
     this.profileSubscription = this.authSv.me.subscribe((value) => {
-      this.proFile = value
-      console.log(this.proFile);
+      this.proFile = value;
     });
 
     this.fetchShowTicket();
-    console.log(this.authSv.showTicket);
-    this.profileSubscription = this.authSv.showTicket.subscribe((ticket: IShowTicket[]) => {
-      this.showTicket = ticket;
-      console.log(this.showTicket);
-    });
+    this.profileSubscription = this.authSv.showTicket.subscribe(
+      (ticket: IShowTicket[]) => {
+        this.showTicket = ticket;
+      }
+    );
 
-    this.fetchProfileSubscription = this.authApiSv
-      .fetchProfile()
-      .subscribe(
-        (res) => {
-          this.userInfo = res.content;
-          console.log(this.userInfo);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    this.fetchProfileSubscription = this.authApiSv.fetchProfile().subscribe(
+      (res) => {
+        this.userInfo = res.content;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.fetchProfileSubscription?.unsubscribe();
     this.profileSubscription?.unsubscribe;
   }
