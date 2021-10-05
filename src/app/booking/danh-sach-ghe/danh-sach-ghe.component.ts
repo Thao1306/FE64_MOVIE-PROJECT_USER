@@ -148,9 +148,11 @@ export class DanhSachGheComponent implements OnInit {
     this.cinemaApiSv.Booking(this.bookingSeatsObjSendBackEnd).subscribe(
       (res) => {
         alert('Đặt vé thành công');
+        this.router.navigate([`/`]);
       },
       (err) => {
         console.log(err);
+        alert('Vui lòng đăng nhập để được đặt vé !!!');
       }
     );
   }

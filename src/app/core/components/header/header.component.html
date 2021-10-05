@@ -19,6 +19,11 @@
         Hello! {{ loggedInUser?.hoTen }} ^-^
       </button>
 
+      <button mat-button type="submit" (click)="handleLogOut()">
+        <mat-icon>logout</mat-icon>
+        <span style="margin-left: 5px">Đăng xuất</span>
+      </button>
+
       <ng-template #authBtn>
         <button mat-button routerLink="/signin" routerLinkActive="active">
           <mat-icon>account_circle</mat-icon>
