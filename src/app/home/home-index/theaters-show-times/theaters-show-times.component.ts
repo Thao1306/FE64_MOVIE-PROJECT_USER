@@ -111,18 +111,21 @@ export class TheatersShowTimesComponent implements OnInit, OnDestroy {
     this.listFilmShowing = showTimeFilmList;
   };
 
-  handleBooking = () => {
-    const ngFormSelected = this.bookingForm._results.find(
-      (ngFom: NgForm) => ngFom.submitted === true
+  handleBooking = (id: any) => {
+    const ngFormValueArr = this.bookingForm._results.map(
+      (ngForm: NgForm) => ngForm.value
     );
 
-    let showTimeFilmId = ngFormSelected.value.showTimeFilm;
-
-    if (showTimeFilmId === '') {
-      this.checkBookingSelected = true;
-    } else {
-      this.router.navigate([`/datve/${showTimeFilmId}`]);
-    }
+    ngFormValueArr.forEach((item: any) => {
+      for (let key in item) {
+        if (key === id.toString() && item[key] !== '') {
+          this.router.navigate([`/datve/${item[key]}`]);
+          return;
+        } else {
+          this.checkBookingSelected = true;
+        }
+      }
+    });
   };
 
   ngOnInit(): void {

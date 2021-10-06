@@ -99,14 +99,14 @@
                       <div>
                         <form
                           #film="ngForm"
-                          (submit)="handleBooking()"
+                          (submit)="handleBooking(item.maPhim)"
                           [name]="item.maPhim"
                         >
-                          <mat-form-field appearance="fill">
+                          <mat-form-field class="form-group mb-2" appearance="fill" color='warn'>
                             <mat-label>Chọn suất chiếu</mat-label>
                             <mat-select
                               #SelectedShowTimeFilm="ngModel"
-                              name="showTimeFilm"
+                              [name]="item.maPhim.toString()"
                               ngModel
                               [required]="checkBookingSelected"
                             >
