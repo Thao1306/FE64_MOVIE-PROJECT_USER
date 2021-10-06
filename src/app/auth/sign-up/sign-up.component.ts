@@ -25,6 +25,7 @@ export class SignUpComponent implements OnInit {
       },
       (err) => {
         console.log(err);
+        alert("Đăng ký không thành công")
       }
     );
 

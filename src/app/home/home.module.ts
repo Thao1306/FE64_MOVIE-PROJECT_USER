@@ -20,6 +20,5 @@ import { SafePipeModule } from 'safe-pipe';
 @NgModule({
   declarations: [HomeIndexComponent, CarouselComponent, MoviesComponent, TheatersShowTimesComponent, MovieItemComponent, MovieShowingComponent, MovieComingComponent],
   imports: [CommonModule, RouterModule, MatIconModule, MatTabsModule, SlickCarouselModule, MatListModule, MatSelectModule, FormsModule, ComponentsModule,SafePipeModule],
-  // exports: [HomeIndexComponent],
 })
 export class HomeModule {}

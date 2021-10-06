@@ -109,12 +109,6 @@ export class TheatersShowTimesComponent implements OnInit, OnDestroy {
     });
 
     this.listFilmShowing = showTimeFilmList;
-    console.log(this.listFilmShowing);
-
-    // const DateShowing = showTimeFilmList?.map((item) => {
-    //   return {...item, ngayChieu: dayjs(item.ngayChieuGioChieu).format('DD/MM/YYYY')}
-    // })
-    // console.log(DateShowing)
   };
 
   handleBooking = () => {

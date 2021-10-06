@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/components/modal/modal.service';
 import { IMovie } from 'src/app/models/movies';
 
@@ -12,7 +12,7 @@ export class MovieComingComponent implements OnInit {
   // @ViewChild('trailer') trailer: any;
 
   constructor(private modalSv: ModalService) {}
-  trailerMovie: string = ""
+  trailerMovie: string = '';
 
   slideConfig = {
     slidesToShow: 4,
@@ -47,12 +47,21 @@ export class MovieComingComponent implements OnInit {
   };
 
   openModalShowing = (trailerSrc: string) => {
-    // this.trailer.nativeElement.src = trailerSrc;
-    this.trailerMovie = trailerSrc
-
     setTimeout(() => {
       this.modalSv.open('custom-modal-movie');
     }, 500);
+
+    if (trailerSrc.search('http') !== -1 && trailerSrc.search('embed') !== -1) {
+      this.trailerMovie = trailerSrc;
+      return;
+    }
+    if (trailerSrc.search('watch') !== -1) {
+      const a = 'https://www.youtube.com/embed/' + trailerSrc.split('v=')[1];
+      this.trailerMovie = a.split('&')[0];
+    } else {
+      this.trailerMovie =
+        'https://www.youtube.com/embed/yF2y5y7BxgM?list=RDyF2y5y7BxgM';
+    }
   };
 
   closeModal = (id: string) => {

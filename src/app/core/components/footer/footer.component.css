@@ -13,6 +13,11 @@ a {
   display: block;
   text-decoration: none;
   margin-bottom: 12px;
+  color: #949494;
+  transition: all 0.25 !important;
+}
+a:hover {
+  color: #f44336;
 }
 .title {
   color: white;

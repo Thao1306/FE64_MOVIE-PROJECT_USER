@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   handleLogOut = () => {
     localStorage.removeItem('t');
-    this.route.navigate(['']);
+    this.route.navigate(['/']);
     window.location.reload();
   };
 
