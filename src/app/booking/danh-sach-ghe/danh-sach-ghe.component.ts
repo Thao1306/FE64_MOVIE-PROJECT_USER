@@ -90,6 +90,7 @@ export class DanhSachGheComponent implements OnInit {
 
     if (foundIndex !== -1) {
       this.bookingSeats.splice(foundIndex, 1);
+      console.log(this.bookingSeats);
     } else {
       this.bookingSeats.push(seatList);
     }
@@ -142,13 +143,17 @@ export class DanhSachGheComponent implements OnInit {
         return { maGhe, giaVe };
       }
     );
-    console.log(this.bookingSeatsObjSendBackEnd);
+    console.log(this.bookingSeatsObjSendBackEnd.danhSachVe.length);
 
-    const newTicket = { ...this.bookingForm.value, maLichChieu: '0' };
+    // const newTicket = { ...this.bookingForm.value, maLichChieu: '0' };
     this.cinemaApiSv.Booking(this.bookingSeatsObjSendBackEnd).subscribe(
       (res) => {
-        alert('Đặt vé thành công');
-        this.router.navigate([`/`]);
+        if((this.bookingSeatsObjSendBackEnd.danhSachVe.length)==0){
+          alert('Vui lòng chọn ghế ngồi !!!');
+        }else{
+          alert('Đặt vé thành công ^^');
+          this.router.navigate([`/`]);
+        }
       },
       (err) => {
         console.log(err);
