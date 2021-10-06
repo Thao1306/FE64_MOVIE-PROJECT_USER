@@ -1,36 +1,26 @@
 <div #headerBlock>
   <mat-toolbar class="headerShowLargeScreen">
     <mat-toolbar-row>
-      <button
-        mat-icon-button
-        routerLink="/"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        (click)="handleClickOnTop()"
-      >
-        <img
-          src="./../../../../assets/Capture-removebg-preview.png"
-          width="100%"
-        />
+      <button mat-icon-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        (click)="handleClickOnTop()">
+        <img src="./../../../../assets/Capture-removebg-preview.png" width="100%" />
       </button>
 
       <span class="example-spacer"></span>
 
       <div class="d-flex">
-        <a class="a-group" href="#movieBlock" data-scroll="movieBlock"
-          >Lịch chiếu</a
-        >
+        <a class="a-group" href="#movieBlock" data-scroll="movieBlock">Lịch chiếu</a>
         <a class="a-group" href="#cinemaBlock">Cụm rạp</a>
       </div>
 
       <span class="example-spacer"></span>
-      
+
       <div *ngIf="loggedInUser; else authBtn">
         <button routerLink="/thongtintaikhoan" mat-button>
           Hello! {{ loggedInUser?.hoTen }} ^-^
         </button>
 
-        <button mat-button type="submit" (click)="handleLogOut()">
+        <button routerLink="/" routerLinkActive="active" mat-button type="submit" (click)="handleLogOut()">
           <mat-icon>logout</mat-icon>
           <span style="margin-left: 5px">Đăng xuất</span>
         </button>
@@ -51,34 +41,15 @@
 
   <div class="fixed-top">
     <nav class="navbar navbar-light bg-light">
-      <button
-        mat-icon-button
-        routerLink="/"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <img
-          src="./../../../../assets/Capture-removebg-preview.png"
-          width="100%"
-        />
+      <button mat-icon-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <img src="./../../../../assets/Capture-removebg-preview.png" width="100%" />
       </button>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarToggleExternalContent"
-        aria-controls="navbarToggleExternalContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+        aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </nav>
-    <div
-      class="collapse"
-      id="navbarToggleExternalContent"
-      style="background-color: white"
-    >
+    <div class="collapse" id="navbarToggleExternalContent" style="background-color: white">
       <div class="p-4 d-flex flex-column text-right">
         <div class="my-1">
           <a class="a-group" href="#movieBlock">Lịch chiếu</a>
@@ -91,21 +62,18 @@
             <button routerLink="/thongtintaikhoan" mat-button>
               Hello! {{ loggedInUser?.hoTen }} ^-^
             </button>
-    
-            <button mat-button type="submit" (click)="handleLogOut()">
+
+            <button mat-icon-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+              type="submit" (click)="handleLogOut()">
               <mat-icon>logout</mat-icon>
               <span style="margin-left: 5px">Đăng xuất</span>
             </button>
           </div>
 
           <ng-template #authBtnResponsive>
-            <a routerLink="/signin" routerLinkActive="active" class="a-group"
-              >Đăng nhập</a
-            >
+            <a routerLink="/signin" routerLinkActive="active" class="a-group">Đăng nhập</a>
 
-            <a routerLink="/signup" routerLinkActive="active" class="a-group"
-              >Đăng ký</a
-            >
+            <a routerLink="/signup" routerLinkActive="active" class="a-group">Đăng ký</a>
           </ng-template>
         </div>
       </div>
