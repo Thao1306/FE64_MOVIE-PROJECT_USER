@@ -1,22 +1,32 @@
 <div class="container">
-  <h1 class="title mat-display-2">Đăng nhập</h1>
-  <!-- reference -->
-  <!-- validation html5 attribute: required, minlength, maxlength, email, pattern -->
-  <form #signinForm="ngForm" (submit)="handleSubmit()">
-    <mat-form-field class="form-group" appearance="outline">
-      <mat-label>Tài khoản</mat-label>
-      <input #taiKhoan="ngModel" matInput required name="taiKhoan" ngModel />
-      <mat-error *ngIf="taiKhoan.errors?.required">Vui lòng nhập tài khoản</mat-error>
-    </mat-form-field>
+  <div class="text-center pt-5 pb-5">
+    <div class="background_image"></div>
+    <img src="./../../../assets/logoFilm.png" width="40%" />
+  </div>
 
-    <mat-form-field class="form-group" appearance="outline">
-      <mat-label>Mật khẩu</mat-label>
-      <input #matKhau="ngModel" matInput required type="password" name="matKhau" ngModel />
-      <mat-error *ngIf="matKhau.errors?.required">Vui lòng nhập mật khẩu</mat-error>
-    </mat-form-field>
-
-    <div class="btn-group mat-display-2">
-      <button mat-raised-button color="warn">Đăng nhập</button>
+  <mat-card class="Login__Card">
+    <div class="pt-3">
+      <mat-card-title>Hi there</mat-card-title>
+      <mat-card-subtitle>Nice to see you again, my friend!!!</mat-card-subtitle>
     </div>
-  </form>
+    <mat-card-content class="ion-item-remove-padding text-center">
+      <form #signinForm="ngForm" (submit)="handleSubmit()">
+        <mat-form-field class="form-group" appearance="outline">
+          <mat-label>Tài khoản</mat-label>
+          <input #taiKhoan="ngModel" matInput required name="taiKhoan" ngModel />
+          <mat-error *ngIf="taiKhoan.errors?.required">Vui lòng nhập tài khoản</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-group" appearance="outline">
+          <mat-label>Mật khẩu</mat-label>
+          <input #matKhau="ngModel" matInput required type="password" name="matKhau" ngModel />
+          <mat-error *ngIf="matKhau.errors?.required">Vui lòng nhập mật khẩu</mat-error>
+        </mat-form-field>
+
+        <div class="btn-group mat-display-2">
+          <button mat-raised-button color="warn">Đăng nhập</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

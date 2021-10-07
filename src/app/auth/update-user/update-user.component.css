@@ -1,9 +1,9 @@
 .container {
-  width: 60%;
+  width: 80%;
   margin: auto;
   margin-top: 70px;
   margin-bottom: 20px;
-  border: 1px solid;
+  /* border: 1px solid; */
   min-height: 100%;
 }
 
@@ -12,8 +12,12 @@
   margin-bottom: 20px;
 }
 
-.padding {
-  padding-left: 150px;
-  padding-right: 150px;
-  padding-top: 50px;
+/* Responsive */
+@media screen and (max-width: 300px) {
+  .tab_group {
+    width: 100%;
+  }
+  .tab_1 {
+    width: 80%;
+  }
 }

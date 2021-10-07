@@ -1,35 +1,37 @@
 <div class="container">
-  <div class="row mat-display-2 mt-5 mb-5">
-    <div class="col-8 bg-light p-5 text-center">
-      <div class="bg-black "></div>
-      <div class="screen">Màn hình</div>
-      <app-ghe (bookSeat)="setBookingSeats($event)" [seatList]="item" *ngFor="let item of seatList">
-      </app-ghe>
+  <article>
+    <div class="row mat-display-2 mt-5 mb-5">
+      <div class="col-sm-8 bg-light p-5 text-center">
+        <div class="bg-black "></div>
+        <div class="screen">Màn hình</div>
+        <app-ghe (bookSeat)="setBookingSeats($event)" [seatList]="item" *ngFor="let item of seatList">
+        </app-ghe>
+      </div>
+
+      <div class="col-sm-4">
+        <form class="w-96" #bookingForm="ngForm" (submit)="handleBooking()">
+          <div>
+            <br />
+            <hr />
+            <h1 class="text-center">{{ showTimeFilmList?.tenPhim }}</h1>
+            <h3>Ngày chiếu : {{ showTimeFilmList?.ngayChieu }}</h3>
+            <h3>Giờ chiếu : {{ showTimeFilmList?.gioChieu }}</h3>
+            <h3>Tên cụm rạp : {{ showTimeFilmList?.tenCumRap }}</h3>
+            <h3>Tên rạp : {{ showTimeFilmList?.tenRap }}</h3>
+            <h3 *ngFor="let item of bookingSeats">
+              Ghế chọn : {{ item.tenGhe }} , Giá vé : {{ item.giaVe.toLocaleString() }}đ
+            </h3>
+            <hr />
+            <h1>Tổng tiền thanh toán: {{ tongTien }}đ</h1>
+          </div>
+          <br>
+
+          <div class="btn-group">
+            <button mat-raised-button class="bg-warn"> ĐẶT VÉ </button>
+          </div>
+
+        </form>
+      </div>
     </div>
-
-    <div class="col-4 ">
-      <form class="w-96" #bookingForm="ngForm" (submit)="handleBooking()">
-        <div>
-          <br />
-          <hr />
-          <h1 class="text-center">{{ showTimeFilmList?.tenPhim }}</h1>
-          <h3>Ngày chiếu : {{ showTimeFilmList?.ngayChieu }}</h3>
-          <h3>Giờ chiếu : {{ showTimeFilmList?.gioChieu }}</h3>
-          <h3>Tên cụm rạp : {{ showTimeFilmList?.tenCumRap }}</h3>
-          <h3>Tên rạp : {{ showTimeFilmList?.tenRap }}</h3>
-          <h3 *ngFor="let item of bookingSeats">
-            Ghế chọn : {{ item.tenGhe }} , Giá vé : {{ item.giaVe.toLocaleString() }}đ
-          </h3>
-          <hr />
-          <h1>Tổng tiền thanh toán: {{ tongTien }}đ</h1>
-        </div>
-        <br>
-
-        <div class="btn-group">
-          <button mat-raised-button class="bg-warn"> ĐẶT VÉ </button>
-        </div>
-
-      </form>
-    </div>
-  </div>
+  </article>
 </div>

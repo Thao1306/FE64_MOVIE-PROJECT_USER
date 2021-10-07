@@ -9,6 +9,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { RouterModule } from '@angular/router';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { RouterModule } from '@angular/router';
     MatTabsModule,
     MatButtonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    MatCardModule
   ]
 })
 export class AuthModule { }
