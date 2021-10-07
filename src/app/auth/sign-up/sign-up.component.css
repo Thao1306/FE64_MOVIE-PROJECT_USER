@@ -1,3 +1,27 @@
+.Login__Card {
+  padding: 10%;
+  margin-bottom: 30px;
+  border-radius: 32px;
+}
+
+.ion-item-remove-padding ion-item {
+  --padding-start: 0px;
+  --inner-padding-end: 0px;
+}
+
+.background_image {
+  background: linear-gradient(192.04deg, #f44336 0%, #98a09f 100%);
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 170%;
+}
+
 .container {
   width: 40%;
   margin: auto;
@@ -7,6 +31,7 @@
 .title {
   text-align: center;
   margin: 30px 0;
+  padding-top: 20px;
 }
 
 .btn-group {
@@ -18,4 +43,11 @@
 .form-group {
   width: 100%;
   margin-bottom: 20px;
+}
+
+/* Responsive */
+@media screen and (max-width: 690px) {
+  .container {
+    width: 75%;
+  }
 }
