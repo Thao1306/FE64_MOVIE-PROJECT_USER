@@ -71,7 +71,7 @@
       class="embed-responsive-item"
       [title]="movieDetail?.tenPhim"
       allowfullscreen
-      [src]="movieDetail!.trailer | safe: 'resourceUrl'"
+      [src]="srcTrailer | safe: 'resourceUrl'"
     ></iframe>
   </div>
 </jw-modal>

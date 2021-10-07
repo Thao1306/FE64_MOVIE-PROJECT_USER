@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { AuthAPIService } from './../../services/auth-api.service';
 import { AuthService } from './../../services/auth.service';
 import { Subscription } from 'rxjs';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-update-user',
@@ -19,6 +20,7 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
   proFile: any;
   showTicket: IShowTicket[] = [];
   showSeat: IShowTicket[] = [];
+  bookedTicket: boolean = true;
 
   @ViewChild('editUser') editUser!: NgForm;
 
@@ -69,9 +71,11 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
       (res: any) => {
         this.authSv.setShowTicket(res.content.thongTinDatVe);
         this.showSeat = res.content.thongTinDatVe[0].danhSachGhe;
+        this.bookedTicket = false
       },
       (err) => {
         console.log(err);
+        this.bookedTicket = true
       }
     );
   };
@@ -85,7 +89,9 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
     this.fetchShowTicket();
     this.profileSubscription = this.authSv.showTicket.subscribe(
       (ticket: IShowTicket[]) => {
-        this.showTicket = ticket;
+        this.showTicket = ticket.map((item) => {
+          return { ...item, ngayDat: dayjs(item.ngayDat).format('DD/MM/YYYY') };
+        });
       }
     );
 

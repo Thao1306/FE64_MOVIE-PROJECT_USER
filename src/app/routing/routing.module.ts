@@ -7,15 +7,18 @@ import { DetailIndexComponent } from '../detail/detail-index/detail-index.compon
 import { SignUpComponent } from './../auth/sign-up/sign-up.component';
 import { SignInComponent } from './../auth/sign-in/sign-in.component';
 import { UpdateUserComponent } from './../auth/update-user/update-user.component';
+import { AuthGuard } from '../guards/auth.guard';
+import { PrivateGuard } from '../guards/private.guard';
 
 const routes: Routes = [
   { path: '', component: HomeIndexComponent },
   { path: 'detail/:id', component: DetailIndexComponent },
   { path: 'datve/:id', component: DatVeIndexComponent },
-  { path: 'danhsachghe', component: DanhSachGheComponent },
-  { path: 'signin', component: SignInComponent },
-  { path: 'signup', component: SignUpComponent },
-  { path: 'thongtintaikhoan', component: UpdateUserComponent },
+  { path: 'signin', component: SignInComponent, canActivate: [AuthGuard]},
+  { path: 'signup', component: SignUpComponent, canActivate: [AuthGuard] },
+  { path: 'thongtintaikhoan', component: UpdateUserComponent, canActivate: [PrivateGuard] },
+  { path: '**', redirectTo: '' },
+
 ];
 
 @NgModule({

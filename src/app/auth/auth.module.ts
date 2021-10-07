@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatTabsModule} from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     MatFormFieldModule,
     MatTabsModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ]
 })
 export class AuthModule { }

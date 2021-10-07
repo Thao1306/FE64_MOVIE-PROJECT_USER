@@ -59,7 +59,8 @@ export class DanhSachGheComponent implements OnInit {
           this.cinemaSv.setSeatList(res.content.danhSachGhe);
         },
         (err) => {
-          console.log(err);
+          alert("Mã lịch chiếu không hợp lệ! Vui lòng chọn lại")
+          this.router.navigate(["/"])
         }
       );
   };
@@ -94,9 +95,7 @@ export class DanhSachGheComponent implements OnInit {
     } else {
       this.bookingSeats.push(seatList);
     }
-    // const a = this.bookingSeats.forEach((item) => {
-    //   return this.tongTien +=item.giaVe
-    // })
+   
     let tong: number = 0;
     for (let item of this.bookingSeats) {
       tong += item.giaVe;

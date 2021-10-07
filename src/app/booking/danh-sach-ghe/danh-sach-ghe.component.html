@@ -18,7 +18,7 @@
           <h3>Tên cụm rạp : {{ showTimeFilmList?.tenCumRap }}</h3>
           <h3>Tên rạp : {{ showTimeFilmList?.tenRap }}</h3>
           <h3 *ngFor="let item of bookingSeats">
-            Ghế chọn : {{ item.tenGhe }} , Giá vé : {{ item.giaVe }}đ
+            Ghế chọn : {{ item.tenGhe }} , Giá vé : {{ item.giaVe.toLocaleString() }}đ
           </h3>
           <hr />
           <h1>Tổng tiền thanh toán: {{ tongTien }}đ</h1>
